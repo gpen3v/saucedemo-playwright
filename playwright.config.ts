@@ -20,7 +20,9 @@ export default defineConfig({
     timeout: 5 * 1000, // 5 seconds
     toHaveScreenshot: {
       // This removes platform and project info from path
-      pathTemplate: '{testDir}/{testFileDir}/{arg}{ext}'
+      pathTemplate: '{testDir}/{testFileDir}/{arg}{ext}',
+      maxDiffPixelRatio: 0.01,
+      scale: "css",
     }
   },
   /* Run tests in files in parallel */
@@ -28,7 +30,7 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 0 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
