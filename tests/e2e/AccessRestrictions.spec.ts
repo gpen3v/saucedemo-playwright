@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { Header, LoginForm, Footer } from '../../pageObjects/global';
 import { ProductsListPage } from '../../pageObjects/productsList';
-import { ProductItemPage } from '../../pageObjects/productItem';
 
+// This test uses authentication state for anonymous user
+test.use({ storageState: { cookies: [], origins: [] } });
 
 test.describe('Access restrictions', () => {
 

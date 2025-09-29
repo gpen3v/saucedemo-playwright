@@ -1,4 +1,4 @@
-import { Page, Locator, expect } from '@playwright/test';
+import test, { Page, Locator, expect } from '@playwright/test';
 
 export class Header {
   readonly page: Page;
@@ -12,7 +12,6 @@ export class Header {
   readonly resetAppStateLink: Locator;
   readonly cartButton: Locator;
   readonly cartCounter: Locator;
-  readonly error: Locator
 
   constructor(page: Page) {
     this.page = page;
