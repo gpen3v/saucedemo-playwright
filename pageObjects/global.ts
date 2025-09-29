@@ -26,7 +26,6 @@ export class Header {
     this.aboutLink = page.getByTestId('about-sidebar-link');
     this.logoutLink = page.getByTestId('logout-sidebar-link');
     this.resetAppStateLink = page.getByTestId('reset-sidebar-link');
-    this.error = page.getByTestId('error');
   }
 
   async visitMenuLink(link: Locator, url: string) {

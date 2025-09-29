@@ -173,6 +173,7 @@ for (const user of users) {
       const header = new Header(page);
       const productsList = new ProductsListPage(page);
       const productItem = new ProductItemPage(page);
+      const cart = new Cart(page);
 
       // Go to a product and navigate to products list
       await productsList.firstProductName.click();
@@ -189,6 +190,11 @@ for (const user of users) {
       // Reset App State
       await header.visitMenuLink(header.resetAppStateLink, '/inventory.html');
       await expect(header.cartCounter).not.toBeVisible();
+      // Go to cart
+      await header.cartButton.click();
+      await expect(header.pageTitle).toHaveText('Your Cart');
+      await expect(page).toHaveURL('/cart.html');
+      await expect.soft(cart.cartItem).not.toBeVisible();
       //await expect.soft(productsList.firstRemoveButton).not.toBeVisible(); // As it is a demo Remove button remains visible
       // Close menu
       await header.closeMenuButton.click();

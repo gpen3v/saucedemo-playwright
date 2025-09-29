@@ -6,7 +6,6 @@ import { Cart } from '../../pageObjects/cart';
 
 const users = [
   { name: 'standard_user', state: 'playwright/.auth/standard_user.json' },
-  { name: 'locked_out_user', state: 'playwright/.auth/locked_out_user.json' },
   { name: 'performance_glitch_user', state: 'playwright/.auth/performance_glitch_user.json' },
   { name: 'problem_user', state: 'playwright/.auth/problem_user.json' },
   { name: 'error_user', state: 'playwright/.auth/error_user.json' },

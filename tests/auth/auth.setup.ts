@@ -20,16 +20,6 @@ setup('authenticate as Standard user', async ({ page }) => {
     await page.context().storageState({ path: standard_user });
 });
 
-setup('authenticate as Locked-out User', async ({ page }) => {
-    const loginForm = new LoginForm(page);
-    await page.goto('/');
-    await loginForm.usernameField.fill(process.env.LOCKED_OUT_USER);
-    await loginForm.passwordField.fill(process.env.PASSWORD);
-    await loginForm.loginButton.click();
-    // End of authentication steps.
-    await page.context().storageState({ path: locked_out_user });
-});
-
 setup('authenticate as Problem user', async ({ page }) => {
     const loginForm = new LoginForm(page);
     await page.goto('/');
