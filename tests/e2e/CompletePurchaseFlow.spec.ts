@@ -39,6 +39,10 @@ for (const user of users) {
       await expect.soft(productItem.productName).toHaveText(productTitle);
       await expect.soft(productItem.productDesc).toHaveText(productDesc);
       await expect.soft(productItem.productPrice).toHaveText(productPrice);
+      //Save product details for later validation in the cart
+      const productDetailsTitle = await productItem.productName.innerText();
+      const productDetailsDesc = await productItem.productDesc.innerText();
+      const productDetailsPrice = await productItem.productPrice.innerText();
 
       // Add first product to cart
       await productItem.addToCartButton.click();
@@ -51,9 +55,9 @@ for (const user of users) {
       await expect(page).toHaveURL('/cart.html');
       await expect.soft(cart.cartItem).toHaveCount(1);
       // Validate cart item details
-      await expect.soft(cart.cartItemName).toHaveText(productTitle);
-      await expect.soft(cart.cartItemDesc).toHaveText(productDesc);
-      await expect.soft(cart.cartItemPrice).toHaveText(productPrice);
+      await expect.soft(cart.cartItemName).toHaveText(productDetailsTitle);
+      await expect.soft(cart.cartItemDesc).toHaveText(productDetailsDesc);
+      await expect.soft(cart.cartItemPrice).toHaveText(productDetailsPrice);
       await expect.soft(cart.removeButton).toBeVisible();
       await expect.soft(cart.continueShoppingButton).toBeVisible();
 
@@ -71,15 +75,15 @@ for (const user of users) {
       //Checkout: Overview
       await expect(header.pageTitle).toHaveText('Checkout: Overview');
       await expect(page).toHaveURL('/checkout-step-two.html');
-      await expect.soft(cart.cartItemName).toHaveText(productTitle);
-      await expect.soft(cart.cartItemDesc).toHaveText(productDesc);
-      await expect.soft(cart.cartItemPrice).toHaveText(productPrice);
+      await expect.soft(cart.cartItemName).toHaveText(productDetailsTitle);
+      await expect.soft(cart.cartItemDesc).toHaveText(productDetailsDesc);
+      await expect.soft(cart.cartItemPrice).toHaveText(productDetailsPrice);
       await expect(page.getByTestId('payment-info-value')).not.toBeEmpty();
       await expect(page.getByTestId('shipping-info-value')).not.toBeEmpty();
       //Total Price = item price + tax
       await cart.totalPrice();
 
-      //Finish
+      //Finish the purchase
       await cart.finishButton.click();
       await expect.soft(header.pageTitle).toHaveText('Checkout: Complete!');
       await expect.soft(page.locator('h2.complete-header')).toHaveText('Thank you for your order!');

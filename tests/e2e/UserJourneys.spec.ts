@@ -169,16 +169,20 @@ for (const user of users) {
       await expect.soft(cart.cartItem).toHaveCount(2);
     });
 
-    test('Other Menu operations', async ({ page }) => {
+    test('Main Menu operations', async ({ page }) => {
       const header = new Header(page);
       const productsList = new ProductsListPage(page);
       const productItem = new ProductItemPage(page);
       const cart = new Cart(page);
 
-      // Go to a product and navigate to products list
-      await productsList.firstProductName.click();
-      await expect(productItem.productImage).toBeVisible();
+      // Go to cart and navigate to products list from main menu
+      await header.cartButton.click();
+      await expect(page).toHaveURL('/cart.html');
       await header.visitMenuLink(header.productsLink, '/inventory.html');
+      // About link
+      await header.visitMenuLink(header.aboutLink, 'https://saucelabs.com/');
+      await page.goBack();
+      await expect(page).toHaveURL('/inventory.html');
       // Add items to cart to verify reset app state
       await productsList.firstAddToCartButton.click();
       await productsList.secondAddToCartButton.click();
@@ -190,20 +194,15 @@ for (const user of users) {
       // Reset App State
       await header.visitMenuLink(header.resetAppStateLink, '/inventory.html');
       await expect(header.cartCounter).not.toBeVisible();
-      // Go to cart
+      // Close menu
+      await header.closeMenuButton.click();
+      await expect(header.mainMenu).not.toBeVisible();
+      // Go to cart to validate it is empty
       await header.cartButton.click();
       await expect(header.pageTitle).toHaveText('Your Cart');
       await expect(page).toHaveURL('/cart.html');
       await expect.soft(cart.cartItem).not.toBeVisible();
       //await expect.soft(productsList.firstRemoveButton).not.toBeVisible(); // As it is a demo Remove button remains visible
-      // Close menu
-      await header.closeMenuButton.click();
-      await expect(header.mainMenu).not.toBeVisible();
-      // About link
-      await header.visitMenuLink(header.aboutLink, 'https://saucelabs.com/');
-      await page.goBack();
-      await expect(page).toHaveURL('/inventory.html');
-
     });
   });
 
@@ -212,7 +211,7 @@ for (const user of users) {
 
     test('Display of social media links and copyright', async ({ page }) => {
       const footer = new Footer(page);
-      await page.goto('/inventory.html', { timeout: 5000 });
+      await page.goto('/inventory.html', { timeout: 5000 }); // Also a performance check for the performance_glitch_user
       await expect(footer.twitterLink).toBeVisible();
       await expect(footer.facebookLink).toBeVisible();
       await expect(footer.linkedInLink).toBeVisible();
