@@ -21,9 +21,9 @@ export default defineConfig<TestOptions>({
     timeout: 5 * 1000, // 5 seconds
     toHaveScreenshot: {
       // This removes platform and project info from path
-      pathTemplate: '{testDir}/{testFileDir}/{arg}{ext}',
+      pathTemplate: '{testDir}/{testFileDir}/Screenshots/{arg}{ext}',
       maxDiffPixelRatio: 0.01,
-      scale: "css",
+      scale: "css"
     }
   },
   /* Run tests in files in parallel */

@@ -15,17 +15,19 @@ test('Full Purchase Flow', async ({ page }) => {
   await expect(header.pageTitle).toHaveText('Products');
   await expect(productsList.productsListContainer).toBeVisible();
 
-  // Visit a product page and validate title, description, price
+  //Save first product details for later validation
   const productTitle = await productsList.firstProductName.innerText();
+  const productImage = await productsList.firstPrductImage.getAttribute('src');
   const productDesc = await productsList.firstProductDesc.innerText();
   const productPrice = await productsList.firstProductPrice.innerText();
+  // Visit first product page and validate title, description, price
   await productsList.firstProductName.click();
-
-  // Verify product details
   await expect.soft(productItem.productImage).toBeVisible();
   await expect.soft(productItem.productName).toHaveText(productTitle);
   await expect.soft(productItem.productDesc).toHaveText(productDesc);
   await expect.soft(productItem.productPrice).toHaveText(productPrice);
+  const productDetailsImage = await productItem.productImage.getAttribute('src');
+  expect.soft(productDetailsImage).toBe(productImage);
   //Save product details for later validation in the cart
   const productDetailsTitle = await productItem.productName.innerText();
   const productDetailsDesc = await productItem.productDesc.innerText();

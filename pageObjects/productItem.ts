@@ -12,7 +12,7 @@ export class ProductItemPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.productImage = page.locator('.inventory_details_img');
+    this.productImage = page.locator('img.inventory_details_img');
     this.productName = page.locator('.inventory_details_name');
     this.productDesc = page.locator('.inventory_details_desc');
     this.productPrice = page.locator('.inventory_details_price');

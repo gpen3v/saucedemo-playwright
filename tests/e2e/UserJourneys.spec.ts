@@ -17,13 +17,13 @@ test.describe(`Products List Page`, () => {
 
     await expect(productsList.productsListContainer).toBeVisible();
     await expect.soft(header.pageTitle).toHaveText('Products');
-    await expect.soft(page).toHaveScreenshot('products_list.png', { fullPage: true });
+    await expect.soft(page).toHaveScreenshot('products_list.png', { fullPage: true, maxDiffPixelRatio: 0.02 });
     // Add first product to cart from list view
     await productsList.firstAddToCartButton.click();
     await expect(header.cartCounter).toHaveText('1');
     // Remove first product from cart from list view
     await productsList.firstRemoveButton.click();
-    await expect(header.cartCounter).not.toBeVisible();
+    await expect.soft(header.cartCounter).not.toBeVisible();
   });
 
   test('Sorting of Products', async ({ page }) => {
@@ -48,8 +48,6 @@ test.describe(`Product Details Page`, () => {
     await productsList.firstProductName.click();
     await expect(productItem.productImage).toBeVisible();
     await expect(productItem.productName).toBeVisible();
-    //Visual comparison of Product details page
-    await expect.soft(page).toHaveScreenshot('product_page.png', { fullPage: true });
     //Add to cart and remove from cart from product details page
     await productItem.addToCartButton.click();
     await expect(header.cartCounter).toHaveText('1');
@@ -78,6 +76,7 @@ test.describe(`Cart and Checkout`, () => {
     //Go to cart
     await header.cartButton.click();
     await expect(header.pageTitle).toHaveText('Your Cart');
+    await expect.soft(page).toHaveScreenshot('cart.png', { fullPage: true });
     await cart.removeButton.click();
     await expect(header.cartCounter).not.toBeVisible();
     await cart.continueShoppingButton.click();

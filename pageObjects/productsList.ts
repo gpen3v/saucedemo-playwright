@@ -4,6 +4,7 @@ export class ProductsListPage {
   readonly page: Page;
   readonly productsListContainer: Locator;
   readonly firstProduct: Locator;
+  readonly firstPrductImage: Locator;
   readonly firstProductName: Locator;
   readonly firstProductDesc: Locator;
   readonly firstProductPrice: Locator;
@@ -21,6 +22,7 @@ export class ProductsListPage {
     this.page = page;
     this.productsListContainer = page.locator('.inventory_list');
     this.firstProduct = page.locator('.inventory_item').first();
+    this.firstPrductImage = this.firstProduct.locator('img.inventory_item_img');
     this.firstProductName = this.firstProduct.locator('.inventory_item_name');
     this.firstProductDesc = this.firstProduct.locator('.inventory_item_desc');
     this.firstProductPrice = this.firstProduct.locator('.inventory_item_price');
