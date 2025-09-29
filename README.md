@@ -6,7 +6,7 @@ This project contains automated tests for the SauceDemo website using Playwright
 
 ```
 ├── .github/workflows      # GitHub Actions workflow configurations
-├── playwright/.auth      # Authentication states storage
+├── playwright/.auth      # Authentication states storage and .env file
 ├── pageObjects/          # Page Object Model implementations
 │   ├── global.ts        # Common components (Header, Footer, Login)
 │   ├── productsList.ts  # Products list page objects
@@ -16,6 +16,8 @@ This project contains automated tests for the SauceDemo website using Playwright
 │   ├── e2e/           # End-to-end test scenarios
 │   ├── auth/          # Authentication setup tests
 │   └── standardUser/  # Standard user specific tests
+├── utils/             # Place for files for custom options, methods and helping funcitons
+│   └── option.ts.     # Custom option for setting different user in every project 
 └── playwright.config.ts # Playwright configuration
 ```
 
@@ -55,7 +57,12 @@ npx playwright test
 
 ### Run a specific test file:
 ```bash
-npx playwright test tests/e2e/VariousCases.spec.ts
+npx playwright test tests/e2e/CompletePurchaseFlow.spec.ts
+```
+
+### Run a specific test by its name:
+```bash
+npx playwright test  -g "Display of Products"
 ```
 
 ### Run tests in headed mode:
@@ -76,8 +83,6 @@ The project uses GitHub Actions for continuous integration. The workflow:
 - Uploads test reports as artifacts
 - Uses GitHub Secrets for environment variables
 
-### GitHub Secrets Required:
-
 ## Test Reports
 
 After test execution, reports are available in the following locations:
@@ -94,37 +99,21 @@ The project follows the Page Object Model pattern for better maintainability:
 - `productItem.ts`: Individual product details page
 - `cart.ts`: Shopping cart and checkout process
 
-## Best Practices
+## Summary
 
-1. Use Page Object Model for better maintainability
-2. Keep test data in environment variables
-3. Use authentication states for faster test execution
-4. Implement soft assertions where appropriate
-5. Follow proper timeout handling
-6. Maintain clear test descriptions
-7. Group related tests in describes
-8. Use beforeEach for common setup
+### Covered Test Cases - 48
 
-## Contributing
+### Projects in Playwright Configuration - 6
 
-1. Create a feature branch
-2. Make your changes
-3. Run tests locally
-4. Submit a pull request
+- Project for getting authentication state for every user. This way every test reuses the authentication states without to login every time
+- Separate projects for every user to have running tests in paralel.
+- Project for restricted access - anonymous and locked-out user.
 
-## Troubleshooting
+### Test scenarios
+- Authentication
+- Complete Purchase flow
+- User journeys for various validations and edge cases and a performance check
+- Restricted access for anonymous and locked-out user
 
-### Common Issues:
 
-1. Authentication failures:
-   - Verify .env file configuration
-   - Check auth state storage
 
-2. Timeout errors:
-   - Check network connectivity
-   - Verify timeout settings in playwright.config.ts
-
-3. Test flakiness:
-   - Review wait conditions
-   - Check for proper assertions
-   - Verify element selectors

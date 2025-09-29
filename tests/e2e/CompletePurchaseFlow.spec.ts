@@ -4,7 +4,7 @@ import { ProductsListPage } from '../../pageObjects/productsList';
 import { ProductItemPage } from '../../pageObjects/productItem';
 import { Cart } from '../../pageObjects/cart';
 
-test('Full Purchase Flow', async ({ page }) => {
+test('Complete Purchase Flow', async ({ page }) => {
   const header = new Header(page);
   const productsList = new ProductsListPage(page);
   const productItem = new ProductItemPage(page);

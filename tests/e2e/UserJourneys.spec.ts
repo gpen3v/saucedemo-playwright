@@ -156,12 +156,18 @@ test.describe(`Main Menu`, () => {
     await expect.soft(cart.cartItem).toHaveCount(2);
   });
 
-  test('Main Menu operations', async ({ page }) => {
+  test('Main Menu and Footer', async ({ page }) => {
     const header = new Header(page);
     const productsList = new ProductsListPage(page);
     const productItem = new ProductItemPage(page);
     const cart = new Cart(page);
+    const footer = new Footer(page);
 
+    //Footer
+    await expect(footer.twitterLink).toBeVisible();
+    await expect(footer.facebookLink).toBeVisible();
+    await expect(footer.linkedInLink).toBeVisible();
+    await footer.copyrightYear();
     // Go to cart and navigate to products list from main menu
     await header.cartButton.click();
     await expect(page).toHaveURL('/cart.html');
@@ -193,14 +199,10 @@ test.describe(`Main Menu`, () => {
   });
 });
 
-test.describe(`Footer`, () => {
+test.describe(`Performance check`, () => {
 
-  test('Display of social media links and copyright', async ({ page }) => {
+  test('Check if Products list loading time is less than 5 seconds', async ({ page }) => {
     const footer = new Footer(page);
-    await page.goto('/inventory.html', { timeout: 5000 }); // Also a performance check for the performance_glitch_user
-    await expect(footer.twitterLink).toBeVisible();
-    await expect(footer.facebookLink).toBeVisible();
-    await expect(footer.linkedInLink).toBeVisible();
-    await footer.copyrightYear();
+    await page.goto('/inventory.html', { timeout: 5000 }); // A performance check
   });
 });
