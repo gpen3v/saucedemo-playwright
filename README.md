@@ -14,6 +14,7 @@ This project contains automated tests for the SauceDemo website using Playwright
 │   └── cart.ts         # Cart and checkout page objects
 ├── tests/               # Test suites
 │   ├── e2e/           # End-to-end test scenarios
+│       └── Screenshots # Saved screenshots for visual comparisons     
 │   ├── auth/          # Authentication setup tests
 │   └── standardUser/  # Standard user specific tests
 ├── utils/             # Place for files for custom options, methods and helping funcitons
@@ -112,7 +113,7 @@ The project follows the Page Object Model pattern for better maintainability:
 ### Test scenarios
 - Authentication
 - Complete Purchase flow
-- User journeys for various validations and edge cases and a performance check
+- User journeys for various validations and edge cases, screenshot comparison and a performance check
 - Restricted access for anonymous and locked-out user
 
 

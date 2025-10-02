@@ -68,6 +68,7 @@ export default defineConfig<TestOptions>({
         testUser: process.env.STANDARD_USER,
       },
       dependencies: ['SauceDemo Authentication'],
+      fullyParallel: false, // disable parallel execution per project
       testIgnore: /.*AccessRestrictions\.spec\.ts/, // ignore Access Restrictions tests
     },
     {
@@ -79,6 +80,7 @@ export default defineConfig<TestOptions>({
         testUser: process.env.PROBLEM_USER,
       },
       dependencies: ['SauceDemo Authentication'],
+      fullyParallel: false, // disable parallel execution per project
       testIgnore: /.*AccessRestrictions\.spec\.ts/, // ignore Access Restrictions tests
     },
     {
@@ -90,6 +92,7 @@ export default defineConfig<TestOptions>({
         testUser: process.env.PERFORMANCE_GLITCH_USER,
       },
       dependencies: ['SauceDemo Authentication'],
+      fullyParallel: false, // disable parallel execution per project
       testIgnore: /.*AccessRestrictions\.spec\.ts/, // ignore Access Restrictions tests
     },
     {
@@ -101,6 +104,7 @@ export default defineConfig<TestOptions>({
         testUser: process.env.ERROR_USER,
       },
       dependencies: ['SauceDemo Authentication'],
+      fullyParallel: false, // disable parallel execution per project
       testIgnore: /.*AccessRestrictions\.spec\.ts/, // ignore Access Restrictions tests
     },
     {
@@ -112,6 +116,7 @@ export default defineConfig<TestOptions>({
         testUser: process.env.VISUAL_USER,
       },
       dependencies: ['SauceDemo Authentication'],
+      fullyParallel: false, // disable parallel execution per project
       testIgnore: /.*AccessRestrictions\.spec\.ts/, // ignore Access Restrictions tests
     },
     {
